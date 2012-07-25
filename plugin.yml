@@ -1,0 +1,18 @@
+name: MobBlock
+main: com.github.r0306.MobBlock.MobBlock
+version: 1.0.0
+permissions:
+    mb.*:
+        description: Gives access to all MobBlock features.
+        children:
+            mb.create: true
+            rtd.play: true
+    mb.create:
+        description: Allows player to create a mob block.
+        default: op
+    mb.toggle:
+        description: Allows users to configure the plugin config through in-game commands.
+        default: op
+    mb.listen:
+        description: Allows users to configure the plugin config through in-game commands.
+        default: op
