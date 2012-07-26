@@ -79,7 +79,7 @@ public class Listeners implements Listener
 
 		if (getMobBlock(block) != null)
 		{
-			System.out.println("hi");
+
 			MobNoteBlock mb = getMobBlock(block);
 						
 			mb.playSound();

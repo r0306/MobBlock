@@ -93,14 +93,25 @@ public class MobNoteBlock implements Serializable
 		
 		SoundPackets sp = new SoundPackets();
 		
-		sp.playSound(location, MobSound.getMob(blockState), getState());
+		if (blockState <= 37)
+		{
 		
+			sp.playSound(location, MobSound.getMob(blockState), getState());
+		
+		}
+		else
+		{
+			
+			sp.playEffect(location, MobSound.getMob(blockState));
+			
+		}
+			
 	}
 	
 	public boolean getState()
 	{
 		
-		return blockState <= 20; 
+		return blockState <= 18; 
 		
 	}
 

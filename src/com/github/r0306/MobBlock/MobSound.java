@@ -22,29 +22,27 @@ public enum MobSound
 	BLAZE_HURT(14),
 	SILVER_FISH_HURT(15),
 	PIG_HURT(16),
-	SNOW_GOLEM_HURT(19),
-	IRON_GOLEM_HURT(20),
-	PLAYER_HURT(21),
-	OCELOT_DEATH(22),
-	MOOSHROOM_DEATH(23),
-	SKELETON_DEATH(24),
-	CREEPER_DEATH(25),
-	SLIME_DEATH(26),
-	ZOMBIE_DEATH(27),
-	SPIDER_DEATH(28),
-	CHICKEN_DEATH(29),
-	COW_DEATH(30),
-	ENDERMAN_DEATH(31),
-	WOLF_DEATH(32),
-	PIG_ZOMBIE_DEATH(33),
-	GHAST_DEATH(34),
-	SHEEP_DEATH(35),
-	BLAZE_DEATH(36),
-	SILVER_FISH_DEATH(37),
-	PIG_DEATH(38),
-	SNOW_GOLEM_DEATH(39),
-	IRON_GOLEM_DEATH(40),
-	PLAYER_DEATH(41);
+	IRON_GOLEM_HURT(17),
+	PLAYER_HURT(18),
+	OCELOT_DEATH(19),
+	MOOSHROOM_DEATH(20),
+	SKELETON_DEATH(21),
+	CREEPER_DEATH(22),
+	SLIME_DEATH(22),
+	ZOMBIE_DEATH(24),
+	SPIDER_DEATH(25),
+	CHICKEN_DEATH(26),
+	COW_DEATH(27),
+	ENDERMAN_DEATH(28),
+	WOLF_DEATH(29),
+	PIG_ZOMBIE_DEATH(30),
+	GHAST_DEATH(31),
+	SHEEP_DEATH(32),
+	BLAZE_DEATH(33),
+	SILVER_FISH_DEATH(34),
+	PIG_DEATH(35),
+	IRON_GOLEM_DEATH(36),
+	PLAYER_DEATH(37);
 		
 	private int value;
 
@@ -78,29 +76,28 @@ public enum MobSound
 		   case 14: return EntityType.BLAZE;
 		   case 15: return EntityType.SILVERFISH;
 		   case 16: return EntityType.PIG;
-		   case 17: return EntityType.SNOWMAN;
-		   case 18: return EntityType.IRON_GOLEM;
-		   case 19: return EntityType.PLAYER;
-		   case 20: return EntityType.OCELOT;
-		   case 21: return EntityType.MUSHROOM_COW;
-		   case 22: return EntityType.SKELETON;
-		   case 23: return EntityType.CREEPER;
-		   case 24: return EntityType.SLIME;
-		   case 25: return EntityType.ZOMBIE;
-		   case 26: return EntityType.SPIDER;
-		   case 27: return EntityType.CHICKEN;
-		   case 28: return EntityType.COW;
-		   case 29: return EntityType.ENDERMAN;
-		   case 30: return EntityType.WOLF;
-		   case 31: return EntityType.PIG_ZOMBIE;
-		   case 32: return EntityType.GHAST;
-		   case 33: return EntityType.SHEEP;
-		   case 34: return EntityType.BLAZE;
-		   case 35: return EntityType.SILVERFISH;
-		   case 36: return EntityType.PIG;
-		   case 37: return EntityType.SNOWMAN;
-		   case 38: return EntityType.IRON_GOLEM;
-		   case 39: return EntityType.PLAYER;
+		   case 17: return EntityType.IRON_GOLEM;
+		   case 18: return EntityType.PLAYER;
+		   case 19: return EntityType.OCELOT;
+		   case 20: return EntityType.MUSHROOM_COW;
+		   case 21: return EntityType.SKELETON;
+		   case 22: return EntityType.CREEPER;
+		   case 23: return EntityType.SLIME;
+		   case 24: return EntityType.ZOMBIE;
+		   case 25: return EntityType.SPIDER;
+		   case 26: return EntityType.CHICKEN;
+		   case 27: return EntityType.COW;
+		   case 28: return EntityType.ENDERMAN;
+		   case 29: return EntityType.WOLF;
+		   case 30: return EntityType.PIG_ZOMBIE;
+		   case 31: return EntityType.GHAST;
+		   case 32: return EntityType.SHEEP;
+		   case 33: return EntityType.BLAZE;
+		   case 34: return EntityType.SILVERFISH;
+		   case 35: return EntityType.PIG;
+		   case 36: return EntityType.IRON_GOLEM;
+		   case 37: return EntityType.PLAYER;
+		   case 38: return EntityType.LIGHTNING;
 
 		}
 		

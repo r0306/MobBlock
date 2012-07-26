@@ -5,14 +5,18 @@ import java.lang.reflect.Field;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
 import net.minecraft.server.DataWatcher;
 import net.minecraft.server.MathHelper;
+import net.minecraft.server.Packet;
+import net.minecraft.server.Packet20NamedEntitySpawn;
 import net.minecraft.server.Packet24MobSpawn;
 import net.minecraft.server.Packet29DestroyEntity;
 import net.minecraft.server.Packet38EntityStatus;
+import net.minecraft.server.Packet60Explosion;
 
 public class SoundPackets 
 {
@@ -39,7 +43,7 @@ public class SoundPackets
 			if (Util.canHear(player))
 			{
 				
-				((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getMobSpawnPacket(location, tempId, entity));
+				((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getEntitySpawnPacket(location, tempId, entity));
 				((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getStatusPacket(tempId, state));
 				((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getEntityDestroyPacket(tempId));
 				
@@ -47,6 +51,63 @@ public class SoundPackets
 			
 		}
 								
+	}
+	
+	public void playEffect(Location location, EntityType entity)
+	{
+		
+		int tempId = getNewId();
+		
+		if (entity == EntityType.LIGHTNING)
+		{
+		
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				
+				if (Util.canHear(player))
+				{
+					
+					((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getExplosion(location, tempId));
+
+				}
+				
+			}
+			
+		}
+		else if (entity == EntityType.UNKNOWN)
+		{
+			
+			location.getWorld().createExplosion(location, 0);
+			
+		}
+		
+	}
+	
+	public Packet getEntitySpawnPacket(Location location, int mobID, EntityType entity)
+	{
+		
+		return entity == EntityType.PLAYER ? getPlayerSpawnPacket(location, mobID) : getMobSpawnPacket(location, mobID, entity);
+		
+	}
+	
+	public Packet20NamedEntitySpawn getPlayerSpawnPacket(Location loc, int mobID)
+	{
+	        
+        int x = MathHelper.floor(loc.getX() * 32.0D);
+        int y = MathHelper.floor(loc.getY() * 32.0D);
+        int z = MathHelper.floor(loc.getZ() * 32.0D);
+		
+        Packet20NamedEntitySpawn packet = new Packet20NamedEntitySpawn();
+        packet.a = mobID;
+        packet.b = "Player"; 
+        packet.c = x;
+        packet.d = y;
+        packet.e = z;
+        packet.f = degreeToByte(loc.getYaw());
+        packet.g = degreeToByte(loc.getPitch());
+       
+        return packet;
+	 
 	}
 	
     public Packet24MobSpawn getMobSpawnPacket(Location loc, int mobID, EntityType entity)
@@ -96,6 +157,23 @@ public class SoundPackets
 		packet.b = (byte) ((state) ? 2 : 3);
 		
 	   	return packet;
+		
+	}
+	
+	public Packet60Explosion getExplosion(Location loc, int entityID)
+	{
+	
+	    int x = MathHelper.floor(loc.getX() * 32.0D);
+	    int y = MathHelper.floor(loc.getY() * 32.0D);
+	    int z = MathHelper.floor(loc.getZ() * 32.0D);
+		
+		Packet60Explosion packet = new Packet60Explosion();
+		packet.a = x;
+		packet.b = y;
+		packet.c = z;
+		packet.d = 0F;
+
+		return packet;
 		
 	}
 	
