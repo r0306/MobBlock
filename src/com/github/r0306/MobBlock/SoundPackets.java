@@ -1,11 +1,13 @@
 package com.github.r0306.MobBlock;
 
 import java.lang.reflect.Field;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 
@@ -53,12 +55,26 @@ public class SoundPackets
 								
 	}
 	
-	public void playEffect(Location location, EntityType entity)
+	public void playEffect(Location location, Effect effect)
 	{
 		
-		int tempId = getNewId();
-		
-		if (entity == EntityType.LIGHTNING)
+		if (effect == Effect.SMOKE)
+		{
+			
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				
+				if (Util.canHear(player))
+				{
+				
+					location.getWorld().strikeLightningEffect(location);
+				
+				}
+					
+			}
+						
+		}
+		else if (effect == Effect.POTION_BREAK)
 		{
 		
 			for (Player player : Bukkit.getOnlinePlayers())
@@ -67,17 +83,27 @@ public class SoundPackets
 				if (Util.canHear(player))
 				{
 					
-					((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getExplosion(location, tempId));
+					((CraftPlayer)player).getHandle().netServerHandler.sendPacket(getExplosion(location));
 
 				}
 				
 			}
 			
 		}
-		else if (entity == EntityType.UNKNOWN)
+		else
 		{
 			
-			location.getWorld().createExplosion(location, 0);
+			for (Player player : Bukkit.getOnlinePlayers())
+			{
+				
+				if (Util.canHear(player))
+				{
+				
+					player.playEffect(location, effect, 50);
+				
+				}
+					
+			}
 			
 		}
 		
@@ -160,18 +186,12 @@ public class SoundPackets
 		
 	}
 	
-	public Packet60Explosion getExplosion(Location loc, int entityID)
+	public Packet60Explosion getExplosion(Location loc)
 	{
-	
-	    int x = MathHelper.floor(loc.getX() * 32.0D);
-	    int y = MathHelper.floor(loc.getY() * 32.0D);
-	    int z = MathHelper.floor(loc.getZ() * 32.0D);
-		
-		Packet60Explosion packet = new Packet60Explosion();
-		packet.a = x;
-		packet.b = y;
-		packet.c = z;
-		packet.d = 0F;
+
+	    Set<Byte> bytes = new HashSet<Byte>();
+
+		Packet60Explosion packet = new Packet60Explosion(loc.getX(), loc.getY(), loc.getZ(), -1F, bytes);
 
 		return packet;
 		

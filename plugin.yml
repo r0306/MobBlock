@@ -4,15 +4,17 @@ version: 1.0.0
 permissions:
     mb.*:
         description: Gives access to all MobBlock features.
+        default: op
         children:
             mb.create: true
-            rtd.play: true
+            md.toggle: true
+            md.listen: true
     mb.create:
         description: Allows player to create a mob block.
-        default: op
+        default: true
     mb.toggle:
-        description: Allows users to configure the plugin config through in-game commands.
-        default: op
+        description: Allows player to change the sound of the mob block.
+        default: true
     mb.listen:
-        description: Allows users to configure the plugin config through in-game commands.
-        default: op
+        description: Allows player to hear sounds played from the mob block.
+        default: true

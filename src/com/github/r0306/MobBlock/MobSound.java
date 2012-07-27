@@ -1,5 +1,6 @@
 package com.github.r0306.MobBlock;
 
+import org.bukkit.Effect;
 import org.bukkit.entity.EntityType;
 
 public enum MobSound
@@ -44,6 +45,7 @@ public enum MobSound
 	IRON_GOLEM_DEATH(36),
 	PLAYER_DEATH(37);
 		
+	@SuppressWarnings("unused")
 	private int value;
 
 	private MobSound(int value)
@@ -97,8 +99,34 @@ public enum MobSound
 		   case 35: return EntityType.PIG;
 		   case 36: return EntityType.IRON_GOLEM;
 		   case 37: return EntityType.PLAYER;
-		   case 38: return EntityType.LIGHTNING;
 
+		}
+		
+		return null;
+		
+	}
+	
+	public static Effect getEffect(int i)
+	{
+		
+		switch(i)
+		{
+			
+			case 38: return Effect.SMOKE;
+			case 39: return Effect.POTION_BREAK;
+			case 40: return Effect.BLAZE_SHOOT;
+			case 41: return Effect.BOW_FIRE;
+			case 42: return Effect.CLICK1;
+			case 43: return Effect.CLICK2;
+			case 44: return Effect.DOOR_TOGGLE;
+			case 45: return Effect.EXTINGUISH;
+			case 46: return Effect.GHAST_SHOOT;
+			case 47: return Effect.GHAST_SHRIEK;
+			case 48: return Effect.STEP_SOUND;
+			case 49: return Effect.ZOMBIE_CHEW_IRON_DOOR;
+			case 50: return Effect.ZOMBIE_CHEW_WOODEN_DOOR;
+			case 51: return Effect.ZOMBIE_DESTROY_DOOR;
+		
 		}
 		
 		return null;
